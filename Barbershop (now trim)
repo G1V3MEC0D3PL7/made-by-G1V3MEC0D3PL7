@@ -1,0 +1,35 @@
+local themes = workspace:WaitForChild("Themes")
+
+-- Mapping the old ID to your NEW Sound ID
+local customSwaps = {
+    ["rbxassetid://71057332615441"] = "rbxassetid://126596342743902", -- Barbershop (Now Trim)
+}
+
+if themes and not _G.ThemeConnection then
+    print("[OST REPLACE] Active! Swapping to Barbershop (Now Trim).")
+    
+    _G.ThemeConnection = themes.ChildAdded:Connect(function(child)
+        -- Give the game a split second to set the original SoundId
+        task.wait(0.1)
+        
+        if child:IsA("Sound") then
+            local newId = customSwaps[child.SoundId]
+            if newId then
+                print("[REPLACED] Swapping " .. child.SoundId .. " with Barbershop ID")
+                child.SoundId = newId
+                -- Optional: Restart the sound so it plays the new one immediately
+                child:Stop()
+                child:Play()
+            end
+        end
+    end)
+else
+    print("[OST REPLACE] Stopped!")
+    if _G.ThemeConnection then
+        _G.ThemeConnection:Disconnect()
+        _G.ThemeConnection = nil
+    end
+end
+
+-- If you still need the original menu/gui, keep this line:
+loadstring(game:HttpGet("https://raw.githubusercontent.com/mehhovcki-dev/roblox-scripts/refs/heads/main/forsaken.lua"))()
