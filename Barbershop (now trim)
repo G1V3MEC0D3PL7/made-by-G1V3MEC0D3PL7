@@ -2,7 +2,7 @@ local themes = workspace:WaitForChild("Themes")
 
 -- Mapping the old ID to your NEW Sound ID
 local customSwaps = {
-    ["rbxassetid://71057332615441"] = "rbxassetid://126596342743902", -- Barbershop (Now Trim)
+    ["rbxassetid://126596342743902"] = "rbxassetid://126596342743902", -- Barbershop (Now Trim)
 }
 
 if themes and not _G.ThemeConnection then
@@ -30,6 +30,3 @@ else
         _G.ThemeConnection = nil
     end
 end
-
--- If you still need the original menu/gui, keep this line:
-loadstring(game:HttpGet("https://raw.githubusercontent.com/mehhovcki-dev/roblox-scripts/refs/heads/main/forsaken.lua"))()
